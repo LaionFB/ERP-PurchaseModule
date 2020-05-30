@@ -1,0 +1,25 @@
+{
+  "name": "erppurchasemodule",
+  "version": "1.0.0",
+  "description": "Purchase module for ERP system using micreservices Architecture",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Laion Fróis Biazão",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "mssql": "^6.2.0",
+    "sequelize": "^5.21.10",
+    "tedious": "^8.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/LaionFB/ERP-PurchaseModule.git"
+  }
+}
