@@ -4,8 +4,6 @@ const businessRules = require('./purchase-order.business-rules');
 const express       = require('express');
 const route         = express.Router();
 
-require('./purchase-order.message-bus');
-
 route.get('/get-all', async (req, res, next) => {
     try{
         let result = await businessRules.getAll();
@@ -50,12 +48,25 @@ route.put('/update', async (req, res, next) => {
     }
 });
 
-route.delete('/delete', async (req, res) => {
+route.delete('/delete', async (req, res, next) => {
     try{
         let rowsAffected = await businessRules.delete(req.query.id);
         res.send({ rowsAffected });
+        next();
     } catch(e){
         console.log(e)
+        res.status(400).send(e.message)
+    }
+});
+
+
+route.get('/get-purchase-order-situations', async (req, res, next) => {
+    try{
+        let result = await businessRules.getPurchaseOrderSituations();
+        res.send(result);
+        next();
+    } catch(e){
+        console.error(e);
         res.status(400).send(e.message)
     }
 });

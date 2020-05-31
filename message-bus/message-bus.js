@@ -1,36 +1,62 @@
 "use strict";
 
-const ampq           = require('amqplib');
-const connString     = process.env.RABBITMQ_CONN_STRING || "amqp://localhost";
-const ampqConnection = ampq.connect(connString);
+const amqp   = require('amqplib');
+const config = require('../config');
 
-let utils = {};
+let messageBus = {};
 
-utils.sendMessage = async (queue, message) => {
-    let connection = await ampqConnection;
-    let channel = await connection.createChannel();
-    await channel.assertQueue(queue, { durable: false });
+let _events     = {};
+let _connection = null;
+let _channel    = null;
+let _isSetup    = false;
 
-    console.log(`RMQ send: ${queue} <= ${JSON.stringify(message)}`);
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+messageBus.subscribe = async (event, callback) => {
+    if(_isSetup)
+        throw new Error(`Can't subscribe to event "${event}" because service has already been started.`);
+
+    _events[event] = callback;
+};
+
+messageBus.sendMessage = async (routingKey, message) => {
+    if(!_isSetup)
+        throw new Error(`Couldn't send message because message bus service hasn't been started yet.`);
+
+    let payload = JSON.stringify(message);
+    _channel.publish(config.RMQ_EXCHANGE, routingKey, Buffer.from(payload));
+    console.log(`RMQ: send event "${routingKey}" => message-length ${payload.length}`);
 }
 
-utils.subscribe = async (queue, callback) => {
-    let connection = await ampqConnection;
-    let channel = await connection.createChannel();
-    await channel.assertQueue(queue, { durable: false });
+messageBus.setup = async () => {
+    _connection = await amqp.connect(`${config.RMQ_HOST}:${config.RMQ_PORT}`);
+    _channel    = await _connection.createChannel();
 
-    channel.consume(queue, async (msg) => {
+    await _channel.assertExchange(config.RMQ_EXCHANGE, 'direct', { durable: true });
+    await _channel.assertQueue(config.RMQ_QUEUE, { durable: true });
+
+    await Promise.all(
+        Object.keys(_events).map(async (event) => {
+            await _channel.bindQueue(config.RMQ_QUEUE, config.RMQ_EXCHANGE, event);
+            console.log(`-RabbitMQ registered subscriber for event "${event}".`);
+        })
+    );
+
+    await _channel.consume(config.RMQ_QUEUE, async (msg) => {
         try{
-            if(msg.content){
-                console.log(`RMQ receive: ${queue} => ${msg.content.toString()}`);
-                await callback(JSON.parse(msg.content.toString()));
-                channel.ack(msg, false);
+            let { routingKey } = msg.fields;
+            if(msg.content && _events[routingKey]){
+                let message = msg.content.toString();
+                console.log(`RMQ: received event "${routingKey}" => message-length ${message.length}`);
+                await _events[routingKey](JSON.parse(message));
             }
+            else
+                console.log(`RMQ: REJECTED event "${routingKey}" with no subscriptions.`);
         } catch(e){
             console.error(e);
         }
-    });
+    }, { noAck: true });
+    
+    _isSetup = true;
+    console.log(`-RabbitMQ listening queue "${config.RMQ_QUEUE}".`)
 }
 
-module.exports = utils;
+module.exports = messageBus;

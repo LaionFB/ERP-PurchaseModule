@@ -4,7 +4,7 @@ const Model      = require('./product.model');
 const utils      = require('../../database/sequelize.utils');
 const repository = {};
 
-repository.getAll = () => Model.findAll(utils.whereFindAll).then(utils.afterFindAll);
+repository.getAll = () => Model.findAll({ where: { isDeleted: false } }).then(utils.afterFindAll);
 
 repository.getById = (id) => Model.findByPk(id).then(utils.afterFindOne);
 

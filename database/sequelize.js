@@ -2,17 +2,19 @@
 
 const Sequelize     = require('sequelize');
 const types         = require('sequelize/lib/data-types.js');
-const setupDatabase = require('./setup-database');
-const credentials   = require('./database.credentials');
+const config        = require('../config');
 
 types.DATE.prototype._stringify = function _stringify(date, options) {
     date = this._applyTimezone(date, options);
     return date.format('YYYY-MM-DD HH:mm:ss.SSS');
 };
 
-module.exports = new Sequelize(credentials.dbDatabase, credentials.dbUser, credentials.dbPassword, {
+const db = new Sequelize(config.DB_DATABASE, config.DB_USER, config.DB_PASSWORD, {
     dialect: 'mssql',
-    host: credentials.dbHost,
+    port: config.DB_PORT,
+    host: config.DB_HOST,
     logging: () => {},
     dialectOptions: { options: { trustServerCertificate: true } }
 });
+
+module.exports = db;

@@ -10,10 +10,10 @@ businessRules.getAll = () => repository.getAll();
 businessRules.getById = (id) => repository.getById(id);
 
 businessRules.insert = (data) => {
-    let obj = _.pick(data, ['productId', 'quantity', 'situationId']);
+    let obj = _.pick(data, ['productId', 'quantity', 'purchaseOrderSituationId']);
     obj.isDeleted = false;
-    obj.situationId = 1;
-    
+    obj.purchaseOrderSituationId = 1;
+
     if(!obj.productId || isNaN(obj.productId) || obj.productId <= 0)
         throw new Error('Produto não encontrado.');
     if(!obj.quantity || isNaN(obj.quantity) || obj.quantity <= 0)
@@ -23,20 +23,27 @@ businessRules.insert = (data) => {
 }
 
 businessRules.update = async (data) => {
-    let obj = _.pick(data, ['id', 'situationId']);
+    let obj = _.pick(data, ['id', 'purchaseOrderSituationId']);
     
     if(!obj.id || isNaN(obj.id))
         throw new Error('Item não encontrado.');
-    if(!obj.situationId || isNaN(obj.situationId) || obj.situationId <= 0)
+    if(!obj.purchaseOrderSituationId || isNaN(obj.purchaseOrderSituationId) || obj.purchaseOrderSituationId <= 0)
         throw new Error('Situação não encontrada.');
 
     let result = await repository.update(obj);
-    messageBus.sendMessage('PurchaseOrderUpdated', obj);
+
+    if(obj.purchaseOrderSituationId == 4){
+        let order = await businessRules.getById(obj.id);
+        messageBus.sendMessage('ProductPurchasedEvent', { productId: order.productId, quantity: order.quantity });
+    }
     return result;
 }
 
 businessRules.delete = (id) => {
     return repository.update({ id, isDeleted: true });
 }
+
+
+businessRules.getPurchaseOrderSituations = () => repository.getPurchaseOrderSituations();
 
 module.exports = businessRules;

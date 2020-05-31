@@ -1,0 +1,21 @@
+{
+    "purchaseOrderSituation": [
+        { "id": 1, "name": "aberto"             },
+        { "id": 2, "name": "em cotação"         },
+        { "id": 3, "name": "aguardando entrega" },
+        { "id": 4, "name": "entregue"           },
+        { "id": 5, "name": "cancelado"          }
+    ],
+    "provider": [
+        { "id": 1, "name": "Brastemp"  },
+        { "id": 2, "name": "Samsung"   },
+        { "id": 3, "name": "Nespresso" }
+    ],
+    "product": [
+        { "id": 1, "name": "Fogão",            "price": 480,  "isDeleted": false },
+        { "id": 2, "name": "Microondas",       "price": 320,  "isDeleted": false },
+        { "id": 3, "name": "Geladeira",        "price": 1600, "isDeleted": false },
+        { "id": 4, "name": "Máquina de lavar", "price": 1040, "isDeleted": false },
+        { "id": 5, "name": "Cafeteira",        "price": 72,   "isDeleted": false }
+    ]
+}
