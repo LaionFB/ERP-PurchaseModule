@@ -19,16 +19,15 @@ const _main = async () => {
     app.use(bodyParser.json());
     app.use(router());
 
-    //await setupDatabase.syncDatabase();
-    //await setupDatabase.syncTables();
-    //await setupDatabase.syncData();
+    await setupDatabase.syncDatabase();
+    await setupDatabase.syncTables();
+    await setupDatabase.syncData();
 
     messageBusSubscribe();
     await messageBus.setup();
 
     app.listen(PORT, function () {
-        let production = !!NODE_ENV;
-        console.log(`-Hosting on port ${PORT} in ${production ? 'PROD' : 'dev'} mode!`);
+        console.log(`-Hosting on port ${PORT} in "${NODE_ENV}" mode.`);
     });
 }
 

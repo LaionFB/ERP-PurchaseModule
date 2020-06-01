@@ -34,7 +34,7 @@ businessRules.update = async (data) => {
 
     if(obj.purchaseOrderSituationId == 4){
         let order = await businessRules.getById(obj.id);
-        messageBus.sendMessage('ProductPurchasedEvent', { productId: order.productId, quantity: order.quantity });
+        messageBus.sendMessage('productPurchasedEvent', { productId: order.productId, quantity: order.quantity });
     }
     return result;
 }

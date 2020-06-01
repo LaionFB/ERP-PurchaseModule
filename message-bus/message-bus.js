@@ -27,7 +27,7 @@ messageBus.sendMessage = async (routingKey, message) => {
 }
 
 messageBus.setup = async () => {
-    _connection = await amqp.connect(`${config.RMQ_HOST}:${config.RMQ_PORT}`);
+    _connection = await amqp.connect(`amqp://${config.RMQ_HOST}:${config.RMQ_PORT}`);
     _channel    = await _connection.createChannel();
 
     await _channel.assertExchange(config.RMQ_EXCHANGE, 'direct', { durable: true });
