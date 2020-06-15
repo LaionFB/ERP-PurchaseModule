@@ -22,25 +22,25 @@ messageBus.sendMessage = async (routingKey, message) => {
         throw new Error(`Couldn't send message because message bus service hasn't been started yet.`);
 
     let payload = JSON.stringify(message);
-    _channel.publish(config.RMQ_EXCHANGE, routingKey, Buffer.from(payload));
+    _channel.publish(config.RABBITMQ_EXCHANGE, routingKey, Buffer.from(payload));
     console.log(`RMQ: send event "${routingKey}" => message-length ${payload.length}`);
 }
 
 messageBus.setup = async () => {
-    _connection = await amqp.connect(`amqp://${config.RMQ_HOST}:${config.RMQ_PORT}`);
+    _connection = await amqp.connect(`amqp://${config.RABBITMQ_HOST}:${config.RABBITMQ_PORT}`);
     _channel    = await _connection.createChannel();
 
-    await _channel.assertExchange(config.RMQ_EXCHANGE, 'direct', { durable: true });
-    await _channel.assertQueue(config.RMQ_QUEUE, { durable: true });
+    await _channel.assertExchange(config.RABBITMQ_EXCHANGE, 'direct', { durable: true });
+    await _channel.assertQueue(config.RABBITMQ_QUEUE, { durable: true });
 
     await Promise.all(
         Object.keys(_events).map(async (event) => {
-            await _channel.bindQueue(config.RMQ_QUEUE, config.RMQ_EXCHANGE, event);
+            await _channel.bindQueue(config.RABBITMQ_QUEUE, config.RABBITMQ_EXCHANGE, event);
             console.log(`-RabbitMQ registered subscriber for event "${event}".`);
         })
     );
 
-    await _channel.consume(config.RMQ_QUEUE, async (msg) => {
+    await _channel.consume(config.RABBITMQ_QUEUE, async (msg) => {
         try{
             let { routingKey } = msg.fields;
             if(msg.content && _events[routingKey]){
@@ -56,7 +56,7 @@ messageBus.setup = async () => {
     }, { noAck: true });
     
     _isSetup = true;
-    console.log(`-RabbitMQ listening queue "${config.RMQ_QUEUE}".`)
+    console.log(`-RabbitMQ listening queue "${config.RABBITMQ_QUEUE}".`)
 }
 
 module.exports = messageBus;

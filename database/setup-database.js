@@ -10,32 +10,35 @@ const setupDatabase = {};
 
 setupDatabase.syncDatabase = async () => {
     let pool = await sql.connect({
-        user: config.DB_USER,
-        password: config.DB_PASSWORD,
-        port: config.DB_PORT,
-        server: config.DB_HOST,
+        user: config.SQL_SERVER_USER,
+        password: config.SQL_SERVER_PASSWORD,
+        port: config.SQL_SERVER_PORT,
+        server: config.SQL_SERVER_HOST,
         database: 'master',
         options: {
             encrypt: true,
             enableArithAbort: true
         }
     });
-    let { recordset } = await pool.request().query(`            
-        IF(db_id(N'${"ERPPurchaseModule"}') IS NULL)
+    let { recordset } = await pool.request().query(`
+        IF NOT EXISTS (SELECT name 
+                       FROM sysdatabases 
+                       WHERE '[' + name + ']' = N'${config.SQL_SERVER_DATA_BASE}' 
+                       OR name = N'${config.SQL_SERVER_DATA_BASE}')
         BEGIN
-            CREATE DATABASE ${"ERPPurchaseModule"};
+            CREATE DATABASE ${config.SQL_SERVER_DATA_BASE};
             SELECT 1 as result;
         END
         ELSE
             SELECT 0 as result;
     `);
     
-    console.log(`-Database "${"ERPPurchaseModule"}" ${recordset[0].result ? 'CREATED' : 'already exists'}.`);
+    console.log(`-Database "${config.SQL_SERVER_DATA_BASE}" ${recordset[0].result ? 'CREATED' : 'already exists'}.`);
 };
 
 setupDatabase.syncTables = async () => {
     await db.sync({ alter: true });
-    console.log(`-Database "${config.DB_DATABASE}" tables in sync.`);
+    console.log(`-Database "${config.SQL_SERVER_DATA_BASE}" tables in sync.`);
 };
 
 setupDatabase.syncData = async () => {
@@ -49,6 +52,7 @@ setupDatabase.syncData = async () => {
                 console.log(`-Added ${newEntries} entries on "${entity}".`);        
         })
     );
+    console.log(`-Database "${config.SQL_SERVER_DATA_BASE}" data in sync.`);
 }
 
 module.exports = setupDatabase;

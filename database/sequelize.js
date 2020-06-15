@@ -9,10 +9,10 @@ types.DATE.prototype._stringify = function _stringify(date, options) {
     return date.format('YYYY-MM-DD HH:mm:ss.SSS');
 };
 
-const db = new Sequelize(config.DB_DATABASE, config.DB_USER, config.DB_PASSWORD, {
+const db = new Sequelize(config.SQL_SERVER_DATA_BASE, config.SQL_SERVER_USER, config.SQL_SERVER_PASSWORD, {
     dialect: 'mssql',
-    port: config.DB_PORT,
-    host: config.DB_HOST,
+    port: config.SQL_SERVER_PORT,
+    host: config.SQL_SERVER_HOST,
     logging: () => {},
     dialectOptions: { options: { trustServerCertificate: true } }
 });

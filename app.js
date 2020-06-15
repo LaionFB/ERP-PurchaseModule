@@ -10,24 +10,27 @@ const router              = require('./routes/router');
 const setupDatabase       = require('./database/setup-database');
 const messageBusSubscribe = require('./message-bus/message-bus.event-handler');
 const messageBus          = require('./message-bus/message-bus');
-const { PORT, NODE_ENV }  = require('./config');
+const config              = require('./config');
 
 const _main = async () => {
     const app = express();
 
     app.use(cors());
     app.use(bodyParser.json());
-    app.use(router());
+    app.use(config.API_GATEWAY_PATH, router());
 
-    await setupDatabase.syncDatabase();
-    await setupDatabase.syncTables();
-    await setupDatabase.syncData();
+    if(config.DB_SYNC_DATABASE == 'Y')
+        await setupDatabase.syncDatabase();
+    if(config.DB_SYNC_TABLES == 'Y')
+        await setupDatabase.syncTables();
+    if(config.DB_SYNC_DATA == 'Y')
+        await setupDatabase.syncData();
 
     messageBusSubscribe();
     await messageBus.setup();
 
-    app.listen(PORT, function () {
-        console.log(`-Hosting on port ${PORT} in "${NODE_ENV}" mode.`);
+    app.listen(config.PORT, function () {
+        console.log(`-Hosting on port ${config.PORT}.`);
     });
 }
 
