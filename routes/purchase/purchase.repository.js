@@ -1,7 +1,7 @@
 "use strict";
 
 const Model             = require('./purchase.model');
-const purchaseSituation = require('./purchase-situation.model');
+const purchaseSituation = require('../situation/purchase-situation.model');
 const utils             = require('../../database/sequelize.utils');
 const repository        = {};
 

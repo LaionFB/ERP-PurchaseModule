@@ -4,7 +4,7 @@ const businessRules = require('./provider-product.business-rules');
 const express       = require('express');
 const route         = express.Router();
 
-route.post('/insert', async (req, res, next) => {
+route.post('/', async (req, res, next) => {
     try{
         let insertedId = await businessRules.insert(req.body);
         res.send({ insertedId });
@@ -15,9 +15,9 @@ route.post('/insert', async (req, res, next) => {
     }
 });
 
-route.delete('/delete', async (req, res, next) => {
+route.delete('/:providerId/:productId', async (req, res, next) => {
     try{
-        let rowsAffected = await businessRules.delete(req.query.providerId, req.query.productId);
+        let rowsAffected = await businessRules.delete(req.params.providerId, req.params.productId);
         res.send({ rowsAffected });
         next();
     } catch(e){

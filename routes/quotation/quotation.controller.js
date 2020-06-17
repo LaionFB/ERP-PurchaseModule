@@ -4,7 +4,7 @@ const businessRules = require('./quotation.business-rules');
 const express       = require('express');
 const route         = express.Router();
 
-route.get('/get-all', async (req, res, next) => {
+route.get('/', async (req, res, next) => {
     try{
         let result = await businessRules.getAll();
         res.send(result);
@@ -15,9 +15,9 @@ route.get('/get-all', async (req, res, next) => {
     }
 });
 
-route.get('/get-by-id', async (req, res, next) => {
+route.get('/:id', async (req, res, next) => {
     try{
-        let result = await businessRules.getById(req.query.id);
+        let result = await businessRules.getById(req.params.id);
         res.send(result);
         next();
     } catch(e){
@@ -26,7 +26,7 @@ route.get('/get-by-id', async (req, res, next) => {
     }
 });
 
-route.post('/insert', async (req, res, next) => {
+route.post('/', async (req, res, next) => {
     try{
         let insertedId = await businessRules.insert(req.body);
         res.send({ insertedId });
@@ -37,7 +37,7 @@ route.post('/insert', async (req, res, next) => {
     }
 });
 
-route.put('/update', async (req, res, next) => {
+route.put('/', async (req, res, next) => {
     try{
         let rowsAffected = await businessRules.update(req.body);
         res.send({ rowsAffected });
@@ -48,9 +48,9 @@ route.put('/update', async (req, res, next) => {
     }
 });
 
-route.delete('/delete', async (req, res, next) => {
+route.delete('/:id', async (req, res, next) => {
     try{
-        let rowsAffected = await businessRules.delete(req.query.id);
+        let rowsAffected = await businessRules.delete(req.params.id);
         res.send({ rowsAffected });
         next();
     } catch(e){

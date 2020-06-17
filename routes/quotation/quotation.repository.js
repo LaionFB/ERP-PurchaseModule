@@ -1,7 +1,7 @@
 "use strict";
 
 const Model              = require('./quotation.model');
-const quotationSituation = require('./quotation-situation.model');
+const quotationSituation = require('../situation/quotation-situation.model');
 const utils              = require('../../database/sequelize.utils');
 const repository         = {};
 

@@ -2,7 +2,7 @@
 
 const config = {
     PORT:                +process.env.PORT                 || 3030,
-    API_GATEWAY_PATH:     process.env.API_GATEWAY_PATH     || '/',
+    API_GATEWAY_PATH:     process.env.API_GATEWAY_PATH     || '/api/purchase', //alterar também no swagger
     SQL_SERVER_HOST:      process.env.SQL_SERVER_HOST      || 'localhost',
     SQL_SERVER_PORT:     +process.env.SQL_SERVER_PORT      || 1433,
     SQL_SERVER_USER:      process.env.SQL_SERVER_USER      || 'sa',
@@ -12,9 +12,9 @@ const config = {
     RABBITMQ_PORT:       +process.env.RABBITMQ_PORT        || 5672,
     RABBITMQ_EXCHANGE:    process.env.RABBITMQ_EXCHANGE    || 'erp_message_bus',
     RABBITMQ_QUEUE:       process.env.RABBITMQ_QUEUE       || 'purchasing',
-    DB_SYNC_DATABASE:     process.env.DB_SYNC_DATABASE     || 'Y',
-    DB_SYNC_TABLES:       process.env.DB_SYNC_TABLES       || 'Y',
-    DB_SYNC_DATA:         process.env.DB_SYNC_DATA         || 'Y'
+    DB_SYNC_DATABASE:     process.env.DB_SYNC_DATABASE     || 'N',
+    DB_SYNC_TABLES:       process.env.DB_SYNC_TABLES       || 'N',
+    DB_SYNC_DATA:         process.env.DB_SYNC_DATA         || 'N'
 };
 
 module.exports = config;

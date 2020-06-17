@@ -5,7 +5,7 @@ const db        		 = require('../../database/sequelize');
 const purchaseOrder		 = require('../purchase-order/purchase-order.model');
 const provider			 = require('../provider/provider.model');
 const product			 = require('../product/product.model');
-const quotationSituation = require('./quotation-situation.model');
+const quotationSituation = require('../situation/quotation-situation.model');
 
 const model = db.define('quotation', {
 	quantity: { type: Sequelize.INTEGER },

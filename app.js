@@ -15,6 +15,9 @@ const config              = require('./config');
 const _main = async () => {
     const app = express();
 
+    app.use(config.API_GATEWAY_PATH + '/swagger', express.static('swagger-ui-dist'));
+    app.get(config.API_GATEWAY_PATH, (req, res) => res.redirect(config.API_GATEWAY_PATH + '/swagger'));
+
     app.use(cors());
     app.use(bodyParser.json());
     app.use(config.API_GATEWAY_PATH, router());

@@ -1,0 +1,1591 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Descrição dos serviços disponíveis para o módulo de Compras.",
+    "version": "1.0.0",
+    "title": "Purchase - Microservices"
+  },
+  "basePath": "/api/purchase",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/provider": {
+      "get": {
+        "description": "Requisita todos os Fornecedores",
+        "summary": "Requisita todos os Fornecedores",
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Providergetall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProviderResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "put": {
+        "description": "Altera Fornecedor para estado especificado",
+        "summary": "Altera Fornecedor para estado especificado",
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Providerupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas alteradas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "post": {
+        "description": "Adiciona novo Fonecedor",
+        "summary": "Adiciona novo Fonecedor",
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Providerinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "$ref": "#/definitions/InsertResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/provider/{id}": {
+      "get": {
+        "description": "Requisita o Fornecedor com id especificado",
+        "summary": "Requisita o Fornecedor com id especificado",
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Providergetbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Fornecedor usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre a entidade",
+            "schema": {
+              "$ref": "#/definitions/ProviderResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta Fornecedor com id especificado",
+        "summary": "Deleta Fornecedor com id especificado",
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Providerdelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Fornecedor usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "description": "Requisita todos os Produtos",
+        "summary": "Requisita todos os Produtos",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "Productgetall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "put": {
+        "description": "Altera Produto para estado especificado",
+        "summary": "Altera Produto para estado especificado",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "Productupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas alteradas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "post": {
+        "description": "Adiciona novo Produto",
+        "summary": "Adiciona novo Produto",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "Productinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "$ref": "#/definitions/InsertResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "description": "Requisita o Produto com id especificado",
+        "summary": "Requisita o Produto com id especificado",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "Productgetbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Produto usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre a entidade",
+            "schema": {
+              "$ref": "#/definitions/ProductResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta Produto com id especificado",
+        "summary": "Deleta Produto com id especificado",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "Productdelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Produto usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/provider-product": {
+      "post": {
+        "description": "Adiciona nova associação entre Fonecedor e Produto",
+        "summary": "Adiciona nova associação entre Fonecedor e Produto",
+        "tags": [
+          "Provider Product"
+        ],
+        "operationId": "ProviderProductinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderProductInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "type": "object",
+              "parameters": {}
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/provider-product/{providerId}/{productId}": {
+      "delete": {
+        "description": "Deleta associação entre Fonecedor e Produto com id de fornecedor e produto especificados",
+        "summary": "Deleta associação entre Fonecedor e Produto com id de fornecedor e produto especificados",
+        "tags": [
+          "Provider Product"
+        ],
+        "operationId": "ProviderProductdelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "providerId",
+            "in": "path",
+            "description": "Id do fornecedor da relação usado na filtragem",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Id do produto da relação usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/purchase-order": {
+      "get": {
+        "description": "Requisita todas as Ordens de Compras",
+        "summary": "Requisita todas as Ordens de Compras",
+        "tags": [
+          "Purchase order"
+        ],
+        "operationId": "Purchaseordergetall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseOrderResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "put": {
+        "description": "Altera Ordem de Compra para estado especificado",
+        "summary": "Altera Ordem de Compra para estado especificado",
+        "tags": [
+          "Purchase order"
+        ],
+        "operationId": "Purchaseorderupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseorderUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas alteradas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "post": {
+        "description": "Adiciona nova Ordem de Compra",
+        "summary": "Adiciona nova Ordem de Compra",
+        "tags": [
+          "Purchase order"
+        ],
+        "operationId": "Purchaseorderinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseorderInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "$ref": "#/definitions/InsertResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/purchase-order/{id}": {
+      "get": {
+        "description": "Requisita a Ordem de Compra com id especificado",
+        "summary": "Requisita a Ordem de Compra com id especificado",
+        "tags": [
+          "Purchase order"
+        ],
+        "operationId": "Purchaseordergetbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Ordem de Compra usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre a entidade",
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta Compra com id especificado",
+        "summary": "Deleta Compra com id especificado",
+        "tags": [
+          "Purchase order"
+        ],
+        "operationId": "Purchaseorderdelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Ordem de Compra usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/quotation": {
+      "get": {
+        "description": "Requisita todas as Cotações",
+        "summary": "Requisita todas as Cotações",
+        "tags": [
+          "Quotation"
+        ],
+        "operationId": "Quotationgetall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/QuotationResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "put": {
+        "description": "Altera Cotação para estado especificado",
+        "summary": "Altera Cotação para estado especificado",
+        "tags": [
+          "Quotation"
+        ],
+        "operationId": "Quotationupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotationUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas alteradas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "post": {
+        "description": "Adiciona nova Cotação",
+        "summary": "Adiciona nova Cotação",
+        "tags": [
+          "Quotation"
+        ],
+        "operationId": "Quotationinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotationInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "$ref": "#/definitions/InsertResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/quotation/{id}": {
+      "get": {
+        "description": "Requisita a Cotação com id especificado",
+        "summary": "Requisita a Cotação com id especificado",
+        "tags": [
+          "Quotation"
+        ],
+        "operationId": "Quotationgetbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Cotação usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre a entidade",
+            "schema": {
+              "$ref": "#/definitions/QuotationResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta Cotação com id especificado",
+        "summary": "Deleta Cotação com id especificado",
+        "tags": [
+          "Quotation"
+        ],
+        "operationId": "Quotationdelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Cotação usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/purchase": {
+      "get": {
+        "description": "Requisita todas as Compras",
+        "summary": "Requisita todas as Compras",
+        "tags": [
+          "Purchase"
+        ],
+        "operationId": "Purchasegetall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "put": {
+        "description": "Altera Compra para estado especificado",
+        "summary": "Altera Compra para estado especificado",
+        "tags": [
+          "Purchase"
+        ],
+        "operationId": "Purchaseupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas alteradas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "post": {
+        "description": "Adiciona nova Compra",
+        "summary": "Adiciona nova Compra",
+        "tags": [
+          "Purchase"
+        ],
+        "operationId": "Purchaseinsert",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseInsertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id da entidade inserida",
+            "schema": {
+              "$ref": "#/definitions/InsertResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/purchase/{id}": {
+      "get": {
+        "description": "Requisita a Compra com id especificado",
+        "summary": "Requisita a Compra com id especificado",
+        "tags": [
+          "Purchase"
+        ],
+        "operationId": "Purchasegetbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Compra usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre a entidade",
+            "schema": {
+              "$ref": "#/definitions/PurchaseResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta Compra com id especificado",
+        "summary": "Deleta Compra com id especificado",
+        "tags": [
+          "Purchase"
+        ],
+        "operationId": "Purchasedelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da Compra usado na filtragem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantidade de linhas excluídas",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/situation/purchase-order": {
+      "get": {
+        "description": "Requisita todas as Situaçãoes de Ordens de Compras",
+        "summary": "Requisita todas as Situaçãoes de Ordens de Compras",
+        "tags": [
+          "Situation"
+        ],
+        "operationId": "getpurchaseordersituations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/situation/quotation": {
+      "get": {
+        "description": "Requisita todas as Situaçãoes de Cotações",
+        "summary": "Requisita todas as Situaçãoes de Cotações",
+        "tags": [
+          "Situation"
+        ],
+        "operationId": "getquotationsituations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    },
+    "/situation/purchase": {
+      "get": {
+        "description": "Requisita todas as Situaçãoes de Compras",
+        "summary": "Requisita todas as Situaçãoes de Compras",
+        "tags": [
+          "Situation"
+        ],
+        "operationId": "getpurchasesituations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Informações sobre todas as entidades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos (Erro na descrição)"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProviderUpdateRequest": {
+      "title": "ProviderUpdateRequest",
+      "example": {
+        "id": 1,
+        "name": "Provider X"
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "ProviderInsertRequest": {
+      "title": "ProviderInsertRequest",
+      "example": {
+        "name": "Provider 1"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ProductUpdateRequest": {
+      "title": "ProductUpdateRequest",
+      "example": {
+        "id": 1,
+        "name": "Product X",
+        "price": 200.00
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "price"
+      ]
+    },
+    "ProductInsertRequest": {
+      "title": "ProductInsertRequest",
+      "example": {
+        "name": "Product 1",
+        "price": 100.00
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "required": [
+        "name",
+        "price"
+      ]
+    },
+    "ProviderProductInsertRequest": {
+      "title": "ProviderProductInsertRequest",
+      "example": {
+        "productId": 1,
+        "providerId": 1
+      },
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "providerId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "productId",
+        "providerId"
+      ]
+    },
+    "PurchaseorderUpdateRequest": {
+      "title": "PurchaseorderUpdateRequest",
+      "example": {
+        "id": 1,
+        "purchaseOrderSituationId": 2
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "purchaseOrderSituationId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "purchaseOrderSituationId"
+      ]
+    },
+    "PurchaseorderInsertRequest": {
+      "title": "PurchaseorderInsertRequest",
+      "example": {
+        "productId": 1,
+        "quantity": 1
+      },
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "productId",
+        "quantity"
+      ]
+    },
+    "QuotationUpdateRequest": {
+      "title": "QuotationUpdateRequest",
+      "example": {
+        "id": 1,
+        "price": 90.00,
+        "quotationSituationId": 2
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "quotationSituationId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "price",
+        "quotationSituationId"
+      ]
+    },
+    "QuotationInsertRequest": {
+      "title": "QuotationInsertRequest",
+      "example": {
+        "purchaseOrderId": 1,
+        "providerId": 1
+      },
+      "type": "object",
+      "properties": {
+        "purchaseOrderId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "providerId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "purchaseOrderId",
+        "providerId"
+      ]
+    },
+    "PurchaseUpdateRequest": {
+      "title": "PurchaseUpdateRequest",
+      "example": {
+        "id": 1,
+        "purchaseSituationId": 2
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "purchaseSituationId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "purchaseSituationId"
+      ]
+    },
+    "PurchaseInsertRequest": {
+      "title": "PurchaseInsertRequest",
+      "example": {
+        "quotationId": 1,
+        "expectedDeliveryDate": "2021-06-16T22:31:35.989Z"
+      },
+      "type": "object",
+      "properties": {
+        "quotationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "expectedDeliveryDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "quotationId",
+        "expectedDeliveryDate"
+      ]
+    },
+    "InsertResponse": {
+      "title": "InsertResponse",
+      "type": "object",
+      "properties": {
+        "insertedId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UpdateResponse": {
+      "title": "UpdateResponse",
+      "type": "object",
+      "properties": {
+        "rowsAffected": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProviderResponse": {
+      "title": "ProviderResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProductResponse": {
+      "title": "ProductResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderResponse"
+          }
+        }
+      }
+    },
+    "PurchaseOrderResponse": {
+      "title": "PurchaseOrderResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "purchaseOrderSituationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "purchaseOrderSituation": {
+          "$ref": "#/definitions/SituationResponse"
+        },
+        "product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number",
+              "format": "float"
+            },
+            "isDeleted": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "QuotationResponse": {
+      "title": "QuotationResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "answerDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "quotationSituationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "purchaseOrderId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "providerId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotationSituation": {
+          "$ref": "#/definitions/SituationResponse"
+        },
+        "provider": {
+          "$ref": "#/definitions/ProviderResponse"
+        },
+        "product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number",
+              "format": "float"
+            },
+            "isDeleted": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "PurchaseResponse": {
+      "title": "PurchaseResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "expectedDeliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "purchaseSituationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotationId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "providerId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "purchaseSituation": {
+          "$ref": "#/definitions/SituationResponse"
+        },
+        "provider": {
+          "$ref": "#/definitions/ProviderResponse"
+        },
+        "product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number",
+              "format": "float"
+            },
+            "isDeleted": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "SituationResponse": {
+      "title": "SituationResponse",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Provider",
+      "description": "Serviços disponíveis para os fornecedores do sistema"
+    },
+    {
+      "name": "Product",
+      "description": "Serviços disponíveis para os produtos do sistema"
+    },
+    {
+      "name": "Provider Product",
+      "description": "Serviços disponíveis para as relações entre fornecedor e produto do sistema"
+    },
+    {
+      "name": "Purchase order",
+      "description": "Serviços disponíveis para as ordens de compra do sistema"
+    },
+    {
+      "name": "Quotation",
+      "description": "Serviços disponíveis para as cotações do sistema"
+    },
+    {
+      "name": "Purchase",
+      "description": "Serviços disponíveis para as compras do sistema"
+    },
+    {
+      "name": "Situation",
+      "description": "Serviços disponíveis para as situações do sistema"
+    }
+  ]
+}

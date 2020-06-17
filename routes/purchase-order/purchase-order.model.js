@@ -3,7 +3,7 @@
 const Sequelize 			 = require('sequelize');
 const db        			 = require('../../database/sequelize');
 const product			 	 = require('../product/product.model');
-const purchaseOrderSituation = require('./purchase-order-situation.model');
+const purchaseOrderSituation = require('../situation/purchase-order-situation.model');
 
 const model = db.define('purchaseOrder', {
 	quantity: { type: Sequelize.INTEGER },
