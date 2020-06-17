@@ -5,9 +5,9 @@ const purchaseOrderSituation = require('./purchase-order-situation.model');
 const utils                  = require('../../database/sequelize.utils');
 const repository             = {};
 
-repository.getAll = () => Model.findAll({ where: { isDeleted: false }, include: 'purchaseOrderSituation' }).then(utils.afterFindAll);
+repository.getAll = () => Model.findAll({ where: { isDeleted: false }, include: ['purchaseOrderSituation', 'product'] }).then(utils.afterFindAll);
 
-repository.getById = (id) => Model.findByPk(id, { include: 'purchaseOrderSituation' }).then(utils.afterFindOne);
+repository.getById = (id) => Model.findByPk(id, { include: ['purchaseOrderSituation', 'product'] }).then(utils.afterFindOne);
 
 repository.insert = (data) => Model.create(data).then(utils.afterInsert);
 

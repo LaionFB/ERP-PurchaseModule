@@ -5,9 +5,9 @@ const quotationSituation = require('./quotation-situation.model');
 const utils              = require('../../database/sequelize.utils');
 const repository         = {};
 
-repository.getAll = () => Model.findAll({ where: { isDeleted: false }, include: 'quotationSituation' }).then(utils.afterFindAll);
+repository.getAll = () => Model.findAll({ where: { isDeleted: false }, include: ['quotationSituation', 'product', 'provider'] }).then(utils.afterFindAll);
 
-repository.getById = (id) => Model.findByPk(id, { include: 'quotationSituation' }).then(utils.afterFindOne);
+repository.getById = (id) => Model.findByPk(id, { include: ['quotationSituation', 'product', 'provider'] }).then(utils.afterFindOne);
 
 repository.insert = (data) => Model.create(data).then(utils.afterInsert);
 

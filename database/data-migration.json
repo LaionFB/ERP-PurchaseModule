@@ -7,9 +7,9 @@
         { "id": 5, "name": "cancelado"          }
     ],
     "provider": [
-        { "id": 1, "name": "Brastemp"  },
-        { "id": 2, "name": "Samsung"   },
-        { "id": 3, "name": "Nespresso" }
+        { "id": 1, "name": "Brastemp",  "isDeleted": false },
+        { "id": 2, "name": "Samsung",   "isDeleted": false },
+        { "id": 3, "name": "Nespresso", "isDeleted": false }
     ],
     "product": [
         { "id": 1, "name": "Fogão",            "price": 480,  "isDeleted": false },
@@ -17,5 +17,17 @@
         { "id": 3, "name": "Geladeira",        "price": 1600, "isDeleted": false },
         { "id": 4, "name": "Máquina de lavar", "price": 1040, "isDeleted": false },
         { "id": 5, "name": "Cafeteira",        "price": 72,   "isDeleted": false }
+    ],
+    "quotationSituation": [
+        { "id": 1, "name": "aguardando" },
+        { "id": 2, "name": "realizada"  },
+        { "id": 3, "name": "aceita"     },
+        { "id": 4, "name": "recusada"   },
+        { "id": 5, "name": "cancelada"  }
+    ],
+    "purchaseSituation": [
+        { "id": 1, "name": "aguardando entrega" },
+        { "id": 2, "name": "entregue"           },
+        { "id": 3, "name": "cancelado"          }
     ]
 }
