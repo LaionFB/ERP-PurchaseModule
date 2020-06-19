@@ -14,7 +14,7 @@ const db = new Sequelize(config.SQL_SERVER_DATA_BASE, config.SQL_SERVER_USER, co
     port: config.SQL_SERVER_PORT,
     host: config.SQL_SERVER_HOST,
     logging: () => {},
-    dialectOptions: { options: { trustServerCertificate: true } }
+    dialectOptions: { options: { trustServerCertificate: true, encrypt: true } }
 });
 
 module.exports = db;

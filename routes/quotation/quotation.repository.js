@@ -16,4 +16,6 @@ repository.update = (data) => Model.update(data, { where: { id: data.id } }).the
 
 repository.getQuotationSituations = () => quotationSituation.findAll().then(utils.afterFindAll);
 
+repository.getByPurchaseOrderId = (purchaseOrderId) => Model.findAll({ where: { purchaseOrderId, isDeleted: false } }).then(utils.afterFindAll);
+
 module.exports = repository;

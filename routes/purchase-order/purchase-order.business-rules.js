@@ -3,6 +3,7 @@
 const _             = require('lodash');
 const repository    = require('./purchase-order.repository');
 const messageBus    = require('../../message-bus/message-bus');
+const db            = require('../../database/sequelize');
 const businessRules = {};
 
 businessRules.getAll = () => repository.getAll();
@@ -30,12 +31,12 @@ businessRules.update = async (data) => {
     if(!obj.purchaseOrderSituationId || isNaN(obj.purchaseOrderSituationId) || obj.purchaseOrderSituationId <= 0)
         throw new Error('Situação não encontrada.');
 
+    let original = await repository.getById(id);
+    if(original.purchaseOrderSituationId != obj.purchaseOrderSituationId)
+        throw new Error('Mudança de situação inválida.');
+
     let result = await repository.update(obj);
 
-    if(obj.purchaseOrderSituationId == 4){
-        let order = await businessRules.getById(obj.id);
-        messageBus.sendMessage('productPurchasedEvent', { productId: order.productId, quantity: order.quantity });
-    }
     return result;
 }
 
@@ -45,5 +46,19 @@ businessRules.delete = (id) => {
 
 
 businessRules.getPurchaseOrderSituations = () => repository.getPurchaseOrderSituations();
+
+businessRules.updateToQuotation = async (id) => {
+    return repository.update({ id: id, purchaseOrderSituationId: 2 });
+}
+
+businessRules.updateToAwaitingDelivery = async (id) => {
+    return repository.update({ id: id, purchaseOrderSituationId: 3 });
+}
+
+businessRules.updateToDelivered = async (id) => {
+    messageBus.sendMessage('productPurchasedEvent', { productId: original.productId, quantity: original.quantity });
+
+    return repository.update({ id: id, purchaseOrderSituationId: 4 });
+}
 
 module.exports = businessRules;

@@ -12,9 +12,9 @@ const config = {
     RABBITMQ_PORT:       +process.env.RABBITMQ_PORT        || 5672,
     RABBITMQ_EXCHANGE:    process.env.RABBITMQ_EXCHANGE    || 'erp_message_bus',
     RABBITMQ_QUEUE:       process.env.RABBITMQ_QUEUE       || 'purchasing',
-    DB_SYNC_DATABASE:     process.env.DB_SYNC_DATABASE     || 'N',
-    DB_SYNC_TABLES:       process.env.DB_SYNC_TABLES       || 'N',
-    DB_SYNC_DATA:         process.env.DB_SYNC_DATA         || 'N'
+    DB_SYNC_DATABASE:     process.env.DB_SYNC_DATABASE     || 'Y',
+    DB_SYNC_TABLES:       process.env.DB_SYNC_TABLES       || 'Y',
+    DB_SYNC_DATA:         process.env.DB_SYNC_DATA         || 'Y'
 };
 
 module.exports = config;

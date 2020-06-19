@@ -46,7 +46,7 @@ setupDatabase.syncData = async () => {
         Object.entries(dataMigration)
         .map(async ([entity, values]) => {
             let model = models[entity];
-            let result = await Promise.all(values.map(x => model.findOrCreate({ where: { id: x.id }, defaults: x })));
+            let result = await Promise.all(values.map(x => model.findOrCreate({ where: x.pk, defaults: x.data })));
             let newEntries = result.filter(x => x[1]).length;
             if(newEntries)
                 console.log(`-Added ${newEntries} entries on "${entity}".`);        

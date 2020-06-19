@@ -1,33 +1,28 @@
 {
-    "purchaseOrderSituation": [
-        { "id": 1, "name": "aberto"             },
-        { "id": 2, "name": "em cotação"         },
-        { "id": 3, "name": "aguardando entrega" },
-        { "id": 4, "name": "entregue"           },
-        { "id": 5, "name": "cancelado"          }
-    ],
     "provider": [
-        { "id": 1, "name": "Brastemp",  "isDeleted": false },
-        { "id": 2, "name": "Samsung",   "isDeleted": false },
-        { "id": 3, "name": "Nespresso", "isDeleted": false }
+        { "pk": { "id": 1 }, "data": { "name": "Fornecedor 1", "isDeleted": false } }
     ],
     "product": [
-        { "id": 1, "name": "Fogão",            "price": 480,  "isDeleted": false },
-        { "id": 2, "name": "Microondas",       "price": 320,  "isDeleted": false },
-        { "id": 3, "name": "Geladeira",        "price": 1600, "isDeleted": false },
-        { "id": 4, "name": "Máquina de lavar", "price": 1040, "isDeleted": false },
-        { "id": 5, "name": "Cafeteira",        "price": 72,   "isDeleted": false }
+        { "pk": { "id": 1 }, "data": { "name": "Produto 1", "price": 100,  "isDeleted": false } }
+    ],
+    "providerProduct":[
+        { "pk": { "providerId": 1, "productId": 1 }, "data": { "providerId": 1, "productId": 1 } }
+    ],
+    "purchaseOrderSituation": [
+        { "pk": { "id": 1 }, "data": { "name": "aberto"             } },
+        { "pk": { "id": 2 }, "data": { "name": "em cotação"         } },
+        { "pk": { "id": 3 }, "data": { "name": "aguardando entrega" } },
+        { "pk": { "id": 4 }, "data": { "name": "entregue"           } }
     ],
     "quotationSituation": [
-        { "id": 1, "name": "aguardando" },
-        { "id": 2, "name": "realizada"  },
-        { "id": 3, "name": "aceita"     },
-        { "id": 4, "name": "recusada"   },
-        { "id": 5, "name": "cancelada"  }
+        { "pk": { "id": 1 }, "data": { "name": "aguardando" } },
+        { "pk": { "id": 2 }, "data": { "name": "realizada"  } },
+        { "pk": { "id": 3 }, "data": { "name": "aceita"     } },
+        { "pk": { "id": 4 }, "data": { "name": "recusada"   } },
+        { "pk": { "id": 5 }, "data": { "name": "comprado"   } }
     ],
     "purchaseSituation": [
-        { "id": 1, "name": "aguardando entrega" },
-        { "id": 2, "name": "entregue"           },
-        { "id": 3, "name": "cancelado"          }
+        { "pk": { "id": 1 }, "data": { "name": "aguardando entrega" } },
+        { "pk": { "id": 2 }, "data": { "name": "entregue"           } }
     ]
 }

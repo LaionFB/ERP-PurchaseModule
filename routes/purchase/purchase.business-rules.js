@@ -1,16 +1,20 @@
 "use strict";
 
-const _                      = require('lodash');
-const repository             = require('./purchase.repository');
-const messageBus             = require('../../message-bus/message-bus');
-const quotationBusinessRules = require('../quotation/quotation.business-rules');
-const businessRules          = {};
+const _                          = require('lodash');
+const repository                 = require('./purchase.repository');
+const messageBus                 = require('../../message-bus/message-bus');
+const db        		         = require('../../database/sequelize');
+const quotationBusinessRules     = require('../quotation/quotation.business-rules');
+const purchaseOrderBusinessRules = require('../purchase-order/purchase-order.business-rules');
+const businessRules              = {};
 
 businessRules.getAll = () => repository.getAll();
 
 businessRules.getById = (id) => repository.getById(id);
 
 businessRules.insert = async (data) => {
+    const transaction = await sequelize.transaction();
+
     let obj = _.pick(data, ['quotationId', 'expectedDeliveryDate']);
     obj.isDeleted = false;
     obj.purchaseSituationId = 1;
@@ -28,10 +32,14 @@ businessRules.insert = async (data) => {
     obj.productId  = quotation.productId;
     obj.providerId = quotation.providerId;
 
+    await quotationBusinessRules.updateToPurchased(quotation.id);
+
     return repository.insert(obj);
 }
 
 businessRules.update = async (data) => {
+    const transaction = await sequelize.transaction();
+    
     let obj = _.pick(data, ['id', 'purchaseSituationId']);
     
     if(!obj.id || isNaN(obj.id))
@@ -39,9 +47,14 @@ businessRules.update = async (data) => {
     if(!obj.purchaseSituationId || isNaN(obj.purchaseSituationId) || obj.purchaseSituationId <= 0)
         throw new Error('Situação não encontrada.');
 
-    if(obj.purchaseSituationId == 2){
-        obj.deliveryDate = new Date();
-    }
+    if(original.purchaseSituationId != 1 || obj.purchaseSituationId == 2)
+        throw new Error('Mudança de situação inválida.');
+
+    obj.deliveryDate = new Date();
+
+    let original = await repository.getById(obj.id);
+    let quotation = await quotationBusinessRules.getById(original.quotationId);
+    await purchaseOrderBusinessRules.updateToDelivered(quotation.purchaseOrderId);
 
     return repository.update(obj);
 }

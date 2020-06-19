@@ -361,8 +361,7 @@
           "200": {
             "description": "Id da entidade inserida",
             "schema": {
-              "type": "object",
-              "parameters": {}
+              "$ref": "#/definitions/InsertResponse"
             }
           },
           "400": {
