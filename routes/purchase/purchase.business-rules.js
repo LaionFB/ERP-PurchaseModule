@@ -12,10 +12,7 @@ businessRules.getAll = () => repository.getAll();
 
 businessRules.getById = (id) => repository.getById(id);
 
-businessRules.insert = async (data) => {
-    const transaction = await sequelize.transaction();
-
-    let obj = _.pick(data, ['quotationId', 'expectedDeliveryDate']);
+businessRules.insert = async (data) => {    let obj = _.pick(data, ['quotationId', 'expectedDeliveryDate']);
     obj.isDeleted = false;
     obj.purchaseSituationId = 1;
 
