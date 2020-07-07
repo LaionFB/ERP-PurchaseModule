@@ -31,7 +31,7 @@ businessRules.update = async (data) => {
     if(!obj.purchaseOrderSituationId || isNaN(obj.purchaseOrderSituationId) || obj.purchaseOrderSituationId <= 0)
         throw new Error('Situação não encontrada.');
 
-    let original = await repository.getById(id);
+    let original = await repository.getById(obj.id);
     if(original.purchaseOrderSituationId != obj.purchaseOrderSituationId)
         throw new Error('Mudança de situação inválida.');
 
@@ -56,6 +56,7 @@ businessRules.updateToAwaitingDelivery = async (id) => {
 }
 
 businessRules.updateToDelivered = async (id) => {
+	let original = await repository.getById(id);
     messageBus.sendMessage('productPurchasedEvent', { productId: original.productId, quantity: original.quantity });
 
     return repository.update({ id: id, purchaseOrderSituationId: 4 });

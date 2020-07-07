@@ -22,6 +22,9 @@ businessRules.insert = async (data) => {    let obj = _.pick(data, ['purchaseOrd
 
     if(!purchaseOrder)
         throw new Error('Ordem de compra não encontrada.');
+        
+    if(purchaseOrder.purchaseOrderSituationId > 2)
+        throw new Error('Ordem de compra não pode mais receber cotações.');
 
     obj.quantity  = purchaseOrder.quantity;
     obj.productId = purchaseOrder.productId;
